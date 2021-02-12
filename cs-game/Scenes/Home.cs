@@ -18,7 +18,7 @@ namespace cs_game.Scenes
             {
                 new Option("1 - Create new game", () => new CreateGame()),
                 new Option("2 - Load saved game", () =>  Console.WriteLine("Load Game")),
-                new Option("3 - About", () =>  Console.WriteLine("About")),
+                new Option("3 - About", () =>  new About()),
                 new Option("4 - Exit", () => Environment.Exit(0)),
             };
 
