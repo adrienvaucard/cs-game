@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cs_game.Scenes;
+using System;
 
 namespace cs_game
 {
@@ -6,7 +7,7 @@ namespace cs_game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var game = new Game();
         }
     }
 }

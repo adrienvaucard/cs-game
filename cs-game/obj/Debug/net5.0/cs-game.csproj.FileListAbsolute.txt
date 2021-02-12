@@ -1,0 +1,16 @@
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.csprojAssemblyReference.cache
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.AssemblyInfoInputs.cache
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.AssemblyInfo.cs
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.csproj.CoreCompileInputs.cache
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\cs-game.exe
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\cs-game.deps.json
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\cs-game.runtimeconfig.json
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\cs-game.runtimeconfig.dev.json
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\cs-game.dll
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\ref\cs-game.dll
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\bin\Debug\net5.0\cs-game.pdb
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.dll
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\ref\cs-game.dll
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.pdb
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game\obj\Debug\net5.0\cs-game.genruntimeconfig.cache
