@@ -49,10 +49,10 @@ namespace cs_game.Scenes
                 }
             }
 
-            foreach (int[] item in ObjectsPos)
+            /*foreach (int[] item in ObjectsPos)
             {
                 Console.WriteLine("Object on Pos X : " + item[0] + " - Pos Y : " + item[1]);
-            }
+            }*/
 
             // Place Monsters
             for (int i = 0; i < rnd.Next(this.minMonsters, this.maxMonsters); i++)
@@ -64,10 +64,12 @@ namespace cs_game.Scenes
                 }
             }
 
-            foreach (int[] item in MonstersPos)
+            /*foreach (int[] item in MonstersPos)
             {
                 Console.WriteLine("Monster on Pos X : " + item[0] + " - Pos Y : " + item[1]);
-            }
+            }*/
+
+
 
         }
 
