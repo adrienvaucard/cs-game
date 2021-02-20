@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cs_game.Db;
 
 namespace cs_game.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    partial class GameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210220192810_saveAddName")]
+    partial class saveAddName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,20 +193,16 @@ namespace cs_game.Migrations
 
             modelBuilder.Entity("cs_game.Db.Models.Monster", b =>
                 {
-                    b.HasOne("cs_game.Db.Models.Save", "Save")
+                    b.HasOne("cs_game.Db.Models.Save", null)
                         .WithMany("Monsters")
                         .HasForeignKey("SaveId");
-
-                    b.Navigation("Save");
                 });
 
             modelBuilder.Entity("cs_game.Db.Models.Player", b =>
                 {
-                    b.HasOne("cs_game.Db.Models.Save", "Save")
+                    b.HasOne("cs_game.Db.Models.Save", null)
                         .WithMany("Player")
                         .HasForeignKey("SaveId");
-
-                    b.Navigation("Save");
                 });
 
             modelBuilder.Entity("cs_game.Db.Models.Weapon", b =>

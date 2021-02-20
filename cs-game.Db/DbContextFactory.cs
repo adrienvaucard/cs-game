@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace cs_game.Db
 {
-    class DbContextFactory : IDesignTimeDbContextFactory<GameDbContext>
+    public class DbContextFactory : IDesignTimeDbContextFactory<GameDbContext>
     {
         public GameDbContext CreateDbContext(string[] args)
         {

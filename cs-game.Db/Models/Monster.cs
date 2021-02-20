@@ -16,6 +16,8 @@ namespace cs_game.Db.Models
         public int Latitude { get; set; }
         public int Longitude { get; set; }
 
+        public Save Save { get; set; }
+
         public Monster(int latitude, int longitude)
         {
             this.Latitude = latitude;

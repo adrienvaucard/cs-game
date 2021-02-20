@@ -19,6 +19,7 @@ namespace cs_game.Db.Models
 
         public List<Weapon> Weapons { get; set; }
         public List<Item> Items { get; set; }
+        public Save Save { get; set; }
 
         public Player(string name, int latitude, int longitude, int hp = 20, int attack = 2, int defense = 2)
         {

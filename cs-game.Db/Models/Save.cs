@@ -8,7 +8,13 @@ namespace cs_game.Db.Models
 {
     public class Save : BaseDataObject
     {
+        public string Name { get; set; }
         public List<Player> Player { get; set; }
         public List<Monster> Monsters { get; set; }
+
+        public Save(string name)
+        {
+            this.Name = name;
+        }
     }
 }
