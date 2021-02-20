@@ -8,5 +8,7 @@ namespace cs_game.Db.Models
 {
     class Save : BaseDataObject
     {
+        public List<Player> Player { get; set; }
+        public List<Monster> Monsters { get; set; }
     }
 }
