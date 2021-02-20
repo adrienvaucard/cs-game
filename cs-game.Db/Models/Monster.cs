@@ -16,8 +16,6 @@ namespace cs_game.Db.Models
         public int Latitude { get; set; }
         public int Longitude { get; set; }
 
-        public Save Save { get; set; }
-
         public Monster(int latitude, int longitude)
         {
             this.Latitude = latitude;
@@ -42,7 +40,7 @@ namespace cs_game.Db.Models
                 this.Attack = 3;
                 this.Defense = 1;
                 this.HitRate = 0.9F;
-            } else if (monsterType >= 6 && monsterType < 10)
+            } else if (monsterType >= 6 && monsterType <= 10)
             {
                 this.Name = "Clown";
                 this.Hp = 10;

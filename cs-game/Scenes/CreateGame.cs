@@ -15,8 +15,6 @@ namespace cs_game.Scenes
         private int minMonsters = 9;
         private int maxMonsters = 11;
 
-        public List<int[]> MonstersPos = new List<int[]>();
-        public Save Save;
         public Player Player;
         public Map Map;
         Random rnd = new Random();
@@ -31,22 +29,26 @@ namespace cs_game.Scenes
             this.Player = new Player(Console.ReadLine(), rnd.Next(0, 10), rnd.Next(0, 10));
             context.Players.Add(Player);
 
-            this.Save = new Save(Player.Name);
-            context.Saves.Add(Save);
-
             this.Map = new Map();
             this.Map.Grid[Player.Latitude, Player.Longitude] = 1;
 
             // Place Monsters
+            List<Monster> monstersList = new List<Monster>();
             for (int i = 0; i < rnd.Next(this.minMonsters, this.maxMonsters); i++)
             {
                 int[] monsterPos = new int[] { rnd.Next(0, 10), rnd.Next(0, 10) };
                 if (this.Map.Grid[monsterPos[0], monsterPos[1]] == 0)
                 {
                     Monster monster = new Monster(rnd.Next(0, 10), rnd.Next(0, 10));
+                    monstersList.Add(monster);
                     context.Monsters.Add(monster);
                 }
             }
+            context.Saves.Add(new Save(Player.Name)
+            {
+                Player = Player,
+                Monsters = monstersList
+            });
             context.SaveChanges();
 
         }

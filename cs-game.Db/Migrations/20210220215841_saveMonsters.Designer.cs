@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cs_game.Db;
 
 namespace cs_game.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    partial class GameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210220215841_saveMonsters")]
+    partial class saveMonsters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,7 +151,8 @@ namespace cs_game.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlayerId");
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
 
                     b.ToTable("Saves");
                 });
@@ -199,8 +202,8 @@ namespace cs_game.Migrations
             modelBuilder.Entity("cs_game.Db.Models.Save", b =>
                 {
                     b.HasOne("cs_game.Db.Models.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
+                        .WithOne("Save")
+                        .HasForeignKey("cs_game.Db.Models.Save", "PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -219,6 +222,8 @@ namespace cs_game.Migrations
             modelBuilder.Entity("cs_game.Db.Models.Player", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("Save");
 
                     b.Navigation("Weapons");
                 });
