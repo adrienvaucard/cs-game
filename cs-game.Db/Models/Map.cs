@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cs_game.Maps
+namespace cs_game.Db.Models
 {
-    class Labyrinth : Map
+    public class Map : BaseDataObject
     {
         public int[,] Grid;
 
-        public Labyrinth()
+        public Map()
         {
             this.Grid = new int[10, 10] {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },

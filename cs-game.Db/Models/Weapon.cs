@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace cs_game.Db.Models
 {
-    public class Weapon : BaseDataObject
+    class Weapon : BaseDataObject
     {
         public string Name { get; set; }
         public int Attack { get; set; }
         public float HitRate { get; set; }
+
+        public Player Player { get; set; }
 
         public Weapon(string name, float hitRate, int attack = 2 )
         {

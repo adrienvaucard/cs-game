@@ -15,6 +15,8 @@ namespace cs_game.Db
         public DbSet<Monster> Monsters { get; set; }
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Map> Maps { get; set; }
+
         public GameDbContext(DbContextOptions<GameDbContext> options) : base(options)
         {
 

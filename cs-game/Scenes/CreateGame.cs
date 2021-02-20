@@ -1,5 +1,5 @@
 ﻿using cs_game.Classes;
-using cs_game.Maps;
+using cs_game.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace cs_game.Scenes
         public List<int[]> MonstersPos = new List<int[]>();
         public string PlayerName;
         public int[] PlayerPos;
-        public Labyrinth Map;
+        public Map Map;
         Random rnd = new Random();
 
         public CreateGame()
@@ -29,7 +29,7 @@ namespace cs_game.Scenes
             Console.WriteLine("Entrez votre nom :");
             this.PlayerName = Console.ReadLine();
 
-            this.Map = new Labyrinth();
+            this.Map = new Db.Models.Map();
 
             // Place player randomly
             this.PlayerPos = new int[] { rnd.Next(0, 10), rnd.Next(0, 10) };
