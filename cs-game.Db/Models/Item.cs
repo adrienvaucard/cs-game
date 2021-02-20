@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cs_game.Db.Models
 {
-    class Item : BaseDataObject
+    public class Item : BaseDataObject
     {
         public string Name { get; set; }
         public int HpBoost { get; set; }

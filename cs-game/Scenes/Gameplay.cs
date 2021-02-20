@@ -1,4 +1,4 @@
-﻿using cs_game.Maps;
+﻿using cs_game.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace cs_game.Scenes
 {
     class Gameplay
     {
-        public Gameplay(Labyrinth Map)
+        public Gameplay(Map Map)
         {
             Console.Clear();
             Console.WriteLine("");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cs_game.Db.Models
 {
-    class Player : BaseDataObject
+    public class Player : BaseDataObject
     {
         public string Name { get; set; }
         public int Hp { get; set; }

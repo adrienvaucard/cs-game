@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cs_game.Db.Models
 {
-    class Weapon : BaseDataObject
+    public class Weapon : BaseDataObject
     {
         public string Name { get; set; }
         public int Attack { get; set; }
