@@ -1,0 +1,4 @@
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\netcoreapp3.1\cs-game.Db.csprojAssemblyReference.cache
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\netcoreapp3.1\cs-game.Db.AssemblyInfoInputs.cache
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\netcoreapp3.1\cs-game.Db.AssemblyInfo.cs
+C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\netcoreapp3.1\cs-game.Db.csproj.CoreCompileInputs.cache
