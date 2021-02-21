@@ -44,7 +44,6 @@ namespace cs_game.Scenes
                 Console.WriteLine("Entrez votre nom :");
                 this.Player = new Player(Console.ReadLine(), rnd.Next(0, 10), rnd.Next(0, 10));
                 this.Map.Grid[Player.Latitude, Player.Longitude] = 1;
-                context.Players.Add(Player);
 
                 try
                 {
@@ -53,6 +52,7 @@ namespace cs_game.Scenes
                 } catch
                 {
                     isPlayerExists = false;
+                    context.Players.Add(Player);
                 }
             } while (isPlayerExists);
 

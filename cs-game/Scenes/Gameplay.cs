@@ -1,4 +1,5 @@
 ﻿using cs_game.Classes;
+using cs_game.Db;
 using cs_game.Db.Models;
 using cs_game.Scenes.Actions;
 using System;
@@ -13,12 +14,17 @@ namespace cs_game.Scenes
     class Gameplay
     {
         public Player Player;
+        public Save Save;
         public bool isInputValid;
         public int selectorChoice;
 
         public Gameplay(Save save)
         {
-            this.Player = save.Player;
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            this.Save = save;
+            this.Player = context.Players.First(player => player.Id == Save.PlayerId);
 
             do
             {
@@ -39,7 +45,7 @@ namespace cs_game.Scenes
 
                 selectorChoice = Int32.Parse(Console.ReadLine());
 
-                if (selectorChoice > 0 && selectorChoice < 4)
+                if (selectorChoice > 0 && selectorChoice < 5)
                 {
                     isInputValid = true;
                 } else
@@ -63,7 +69,7 @@ namespace cs_game.Scenes
                     new Gameplay(save);
                     break;
                 case 4:
-                    Environment.Exit(0);
+                    new Home();
                     break;
                 default:
                     Console.WriteLine("Erreur");

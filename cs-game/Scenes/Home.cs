@@ -17,7 +17,7 @@ namespace cs_game.Scenes
             options = new List<Option>
             {
                 new Option("1 - Créer une partie", () => new CreateGame()),
-                new Option("2 - Charger une partie", () =>  Console.WriteLine("Load Game")),
+                new Option("2 - Charger une partie", () =>  new LoadGame()),
                 new Option("3 - A propos", () =>  new About()),
                 new Option("4 - Quitter", () => Environment.Exit(0)),
             };
