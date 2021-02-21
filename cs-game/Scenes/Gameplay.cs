@@ -14,6 +14,7 @@ namespace cs_game.Scenes
     {
         public Player Player;
         public bool isInputValid;
+        public int selectorChoice;
 
         public Gameplay(Save save)
         {
@@ -32,25 +33,37 @@ namespace cs_game.Scenes
                 Console.WriteLine("Que voulez-vous faire ?");
                 Console.WriteLine("");
                 Console.WriteLine("1 - Se déplacer");
-                Console.WriteLine("2 - Utiliser un objet");
-                Console.WriteLine("3 - Quitter");
+                Console.WriteLine("2 - Afficher l'inventaire");
+                Console.WriteLine("3 - Afficher les statistiques");
+                Console.WriteLine("4 - Quitter");
 
-                if (Int32.Parse(Console.ReadLine()) > 0)
+                selectorChoice = Int32.Parse(Console.ReadLine());
+
+                if (selectorChoice > 0 && selectorChoice < 4)
                 {
                     isInputValid = true;
                 } else
                 {
                     isInputValid = false;
                 }
-            } while (isInputValid);
+            } while (!isInputValid);
            
-            switch (Int32.Parse(Console.ReadLine()))
+            switch (selectorChoice)
             {
                 case 1:
                     new Move();
+                    new Gameplay(save);
                     break;
                 case 2:
-                    new Move();
+                    new ListInventory(Player);
+                    new Gameplay(save);
+                    break;
+                case 3:
+                    new ListStats(Player);
+                    new Gameplay(save);
+                    break;
+                case 4:
+                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Erreur");
