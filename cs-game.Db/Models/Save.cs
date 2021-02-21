@@ -13,6 +13,7 @@ namespace cs_game.Db.Models
         public int PlayerId { get; set; }
         public string Name { get; set; }
         public virtual Player Player { get; set; }
+        public virtual Exit Exit { get; set; }
         public List<Monster> Monsters { get; set; }
 
         public Save(string name)

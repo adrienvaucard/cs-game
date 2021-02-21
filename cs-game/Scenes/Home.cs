@@ -16,10 +16,10 @@ namespace cs_game.Scenes
             // Define Options
             options = new List<Option>
             {
-                new Option("1 - Create new game", () => new CreateGame()),
-                new Option("2 - Load saved game", () =>  Console.WriteLine("Load Game")),
-                new Option("3 - About", () =>  new About()),
-                new Option("4 - Exit", () => Environment.Exit(0)),
+                new Option("1 - Créer une partie", () => new CreateGame()),
+                new Option("2 - Charger une partie", () =>  Console.WriteLine("Load Game")),
+                new Option("3 - A propos", () =>  new About()),
+                new Option("4 - Quitter", () => Environment.Exit(0)),
             };
 
             var selector = new OptionSelector(options);
