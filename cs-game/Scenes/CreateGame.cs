@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace cs_game.Scenes
@@ -14,6 +15,7 @@ namespace cs_game.Scenes
         // Paramaters
         private int minMonsters = 9;
         private int maxMonsters = 11;
+        private bool isPlayerExists;
 
         public Player Player;
         public Map Map;
@@ -24,10 +26,29 @@ namespace cs_game.Scenes
             var factory = new DbContextFactory();
             var context = factory.CreateDbContext(null);
 
-            Console.Clear();
-            Console.WriteLine("Entrez votre nom :");
-            this.Player = new Player(Console.ReadLine(), rnd.Next(0, 10), rnd.Next(0, 10));
-            context.Players.Add(Player);
+            do
+            {
+                if (isPlayerExists)
+                {
+                    Console.WriteLine("Erreur : Ce nom est déjà pris. Veuillez en choisir un autre.");
+                    Thread.Sleep(2000);
+                }
+
+                Console.Clear();
+                Console.WriteLine("Entrez votre nom :");
+                this.Player = new Player(Console.ReadLine(), rnd.Next(0, 10), rnd.Next(0, 10));
+                context.Players.Add(Player);
+
+                try
+                {
+                    context.Players.First(player => player.Name == Player.Name);
+                    isPlayerExists = true;
+                } catch
+                {
+                    isPlayerExists = false;
+                }
+            } while (isPlayerExists);
+            
 
             this.Map = new Map();
             this.Map.Grid[Player.Latitude, Player.Longitude] = 1;

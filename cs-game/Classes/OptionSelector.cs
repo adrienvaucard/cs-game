@@ -62,7 +62,7 @@ namespace cs_game.Classes
                 }
                 else
                 {
-                    Console.Write(" ");
+                    Console.Write("  ");
                 }
 
                 Console.WriteLine(option.Name);
