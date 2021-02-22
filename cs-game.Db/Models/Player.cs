@@ -43,7 +43,7 @@ namespace cs_game.Db.Models
 
             Monster hitMonster = context.Monsters.First(m => m.Id == monster.Id);
 
-            if ((chance/10) < weapon.HitRate)
+            if (((float) chance/10) < weapon.HitRate)
             {
                 hitMonster.Hp -= damages;
                 Console.WriteLine("Vous attaquez le {0} et il perd {1} points de vie", monster.Name, damages);
@@ -91,6 +91,79 @@ namespace cs_game.Db.Models
                 Console.ReadLine();
                 return false;
             }
+        }
+
+        public Player GainXp()
+        {
+            Random rnd = new Random();
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Player player = context.Players.First(p => p.Id == this.Id);
+
+            int gainedXp = rnd.Next(10, 21);
+            player.Xp += gainedXp;
+            context.SaveChanges();
+            Console.WriteLine("Vous gagnez {0} XP", gainedXp);
+            return player;
+        }
+
+        public void DropItem()
+        {
+            Random rnd = new Random();
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Player player = context.Players.First(p => p.Id == this.Id);
+            List<Item> items = new List<Item>();
+
+            int droppedItem = rnd.Next(0, 10);
+            if (droppedItem >= 0 && droppedItem < 2)
+            {
+                items.Add(new Item("Flacon de Mercurochrome", 10));
+                Console.WriteLine("Vous récupérez un Flacon de Mercurochrome");
+            } else if (droppedItem >= 2 && droppedItem < 4)
+            {
+                items.Add(new Item("Canette de Monster", 0, 2));
+                Console.WriteLine("Vous récupérez une canette de Monster");
+            } else if (droppedItem >= 4 && droppedItem < 6)
+            {
+                items.Add(new Item("Rouleau de Flex tape", 0, 0 ,2));
+                Console.WriteLine("Vous récupérez un rouleau de Flex Tape");
+            }
+
+            player.Items = items;
+            context.SaveChanges();
+        }
+
+        public void DropWeapon()
+        {
+            Random rnd = new Random();
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Player player = context.Players.First(p => p.Id == this.Id);
+            List<Weapon> weapons = new List<Weapon>();
+
+            int droppedItem = rnd.Next(0, 10);
+            if (droppedItem >= 0 && droppedItem < 2)
+            {
+                weapons.Add(new Weapon("Nerf de Boeuf", 0.60F, 5));
+                Console.WriteLine("Vous récupérez un nerf de boeuf");
+            }
+            else if (droppedItem >= 2 && droppedItem < 4)
+            {
+                weapons.Add(new Weapon("Carabine à plomb mal réglée", 0.40F, 10));
+                Console.WriteLine("Vous récupérez une carabine à plomb mal réglée");
+            }
+            else if (droppedItem >= 4 && droppedItem < 6)
+            {
+                weapons.Add(new Weapon("Parpaing bien lourd", 0.80F, 7));
+                Console.WriteLine("Vous récupérez un parpaing bien lourd");
+            }
+
+            player.Weapons = weapons;
+            context.SaveChanges();
         }
 
         public void ListInventory()
@@ -168,6 +241,22 @@ namespace cs_game.Db.Models
             Items = context.Items.Where(i => i.PlayerId == this.Id).ToList();
 
             return Items;
+        }
+
+        public void ListStats()
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Player player = context.Players.First(p => p.Id == this.Id);
+            Console.Clear();
+            Console.WriteLine("Statistiques");
+            Console.WriteLine("HP - {0}", player.Hp);
+            Console.WriteLine("XP - {0}", player.Xp);
+            Console.WriteLine("Attack - {0}", player.Attack);
+            Console.WriteLine("Defense - {0}", player.Defense);
+
+            Console.ReadLine();
         }
 
     }

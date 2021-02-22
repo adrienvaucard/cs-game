@@ -11,7 +11,6 @@ namespace cs_game.Scenes.Actions
     class Attack
     {
         private Player Player;
-        private Weapon weapon;
         private Monster Monster;
         private Save Save;
 
@@ -21,14 +20,11 @@ namespace cs_game.Scenes.Actions
             var context = factory.CreateDbContext(null);
 
             this.Player = player;
-            this.Save = context.Saves.First(s => s.Name == Player.Name);
             this.Monster = monster;
 
             Console.Clear();
             this.Player.Hit(weapon, this.Monster);
-            Console.ReadLine();
-
-                
+            Console.ReadLine();   
         }
     }
 }

@@ -59,7 +59,14 @@ namespace cs_game.Scenes
                     Console.WriteLine("3 - Afficher les statistiques");
                     Console.WriteLine("4 - Quitter");
 
-                    selectorChoice = Int32.Parse(Console.ReadLine());
+                    try
+                    {
+                        selectorChoice = Int32.Parse(Console.ReadLine());
+                    } catch
+                    {
+                        selectorChoice = 0;
+                    }
+                    
 
                     if (selectorChoice > 0 && selectorChoice < 5)
                     {
@@ -71,7 +78,7 @@ namespace cs_game.Scenes
                     }
                 } else
                 {
-                    new Fight(Player, Monster);
+                    new Fight(Player, Monster, true);
                 }
                 
             } while (!isInputValid);

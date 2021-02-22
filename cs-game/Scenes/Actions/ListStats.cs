@@ -14,14 +14,7 @@ namespace cs_game.Scenes.Actions
         {
             this.Player = player;
 
-            Console.Clear();
-            Console.WriteLine("Statistiques");
-            Console.WriteLine("HP - {0}", player.Hp);
-            Console.WriteLine("XP - {0}", player.Xp);
-            Console.WriteLine("Attack - {0}", player.Attack);
-            Console.WriteLine("Defense - {0}", player.Defense);
-
-            Console.ReadLine();
+            this.Player.ListStats();
         }
     }
 }

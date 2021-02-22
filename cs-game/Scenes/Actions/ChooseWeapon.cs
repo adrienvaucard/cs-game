@@ -33,7 +33,7 @@ namespace cs_game.Scenes.Actions
                     Console.Clear();
                     new Attack(Player, weapon, Monster);
                     this.Monster = context.Monsters.First(m => m.Id == Monster.Id);
-                    new Fight(Player, Monster);
+                    new Fight(Player, Monster, false);
                 }));
             }
 
@@ -41,7 +41,7 @@ namespace cs_game.Scenes.Actions
             {
                 options.Clear();
                 Console.Clear();
-                new Fight(Player, Monster);
+                new Fight(Player, Monster, true);
             }));
 
             var selector = new OptionSelector(options);

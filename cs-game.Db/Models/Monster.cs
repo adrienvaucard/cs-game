@@ -51,5 +51,40 @@ namespace cs_game.Db.Models
                 this.HitRate = 0.7F;
             }
         }
+
+        public void Die()
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Monster deadMonster = context.Monsters.First(m => m.Id == this.Id);
+            context.Monsters.Remove(deadMonster);
+            context.SaveChanges();
+        }
+
+        public Player Hit(Player player)
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Random rnd = new Random();
+            int damages = this.Attack;
+            int chance = rnd.Next(0, 10);
+
+            Player hitPlayer = context.Players.First(p => p.Id == player.Id);
+
+            if (((float) chance / 10) < this.HitRate)
+            {
+                hitPlayer.Hp -= damages;
+                Console.WriteLine("Le {0} vous attaque et vous perdez {1} points de vie", this.Name, damages);
+                context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("Le {0} loupe son attaque. Vous ne prenez aucun dégât.", this.Name);
+            }
+
+            return player;
+        }
     }
 }
