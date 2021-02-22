@@ -83,7 +83,7 @@ namespace cs_game.Scenes.Actions
                     new Fight(Player, Monster);
                     break;
                 case 4:
-                    new Run();
+                    new Run(Player);
                     new Fight(Player, Monster);
                     break;
                 default:

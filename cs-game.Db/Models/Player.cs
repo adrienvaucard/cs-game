@@ -56,6 +56,43 @@ namespace cs_game.Db.Models
             return monster;
         }
 
+        public bool Run()
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+            Random rnd = new Random();
+            int runChance = rnd.Next(0, 10);
+
+            Player toUpdatePlayer = context.Players.First(player => player.Id == this.Id);
+
+            Console.Clear();
+            if (runChance < 5)
+            {
+                if (!(toUpdatePlayer.Longitude - 1 < 0))
+                {
+                    toUpdatePlayer.Longitude -= 1;
+                } else if (!(toUpdatePlayer.Longitude + 1 > 9))
+                {
+                    toUpdatePlayer.Longitude += 1;
+                } else if (!(toUpdatePlayer.Latitude - 1 < 0))
+                {
+                    toUpdatePlayer.Latitude -= 1;
+                } else if (!(toUpdatePlayer.Latitude + 1 > 9))
+                {
+                    toUpdatePlayer.Latitude += 1;
+                }
+                context.SaveChanges();
+                Console.WriteLine("Vous réussissez à vous enfuir");
+                Console.ReadLine();
+                return true;
+            } else
+            {
+                Console.WriteLine("Vous trébuchez et loupez votre fuite");
+                Console.ReadLine();
+                return false;
+            }
+        }
+
         public void ListInventory()
         {
             var factory = new DbContextFactory();

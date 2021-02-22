@@ -1,4 +1,6 @@
-﻿using System;
+﻿using cs_game.Db;
+using cs_game.Db.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +10,21 @@ namespace cs_game.Scenes.Actions
 {
     class Run
     {
-        public Run()
+        private Player Player;
+        private Save Save;
+        public Run(Player player)
         {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            this.Player = player;
+            this.Save = context.Saves.First(save => save.PlayerId == Player.Id);
+
             Console.Clear();
-            Console.WriteLine("Fuite");
-            Console.ReadLine();
+            if (Player.Run())
+            {
+                new Gameplay(Save);
+            }
         }
     }
 }
