@@ -14,6 +14,7 @@ namespace cs_game.Db.Models
         public int DefenseBoost { get; set; }
 
         public Player Player { get; set; }
+        public int PlayerId { get; set; }
 
         public Item(string name, int hpBoost = 0, int attackBoost = 0, int defenseBoost = 0)
         {

@@ -42,7 +42,16 @@ namespace cs_game.Scenes
 
                 Console.Clear();
                 Console.WriteLine("Entrez votre nom :");
-                this.Player = new Player(Console.ReadLine(), rnd.Next(0, 10), rnd.Next(0, 10));
+
+                // Give Base Weapon
+                List<Weapon> playerWeapons = new List<Weapon>()
+                {
+                    new Weapon("Couteau tout rouillé", 0.85F, 2)
+                };
+                this.Player = new Player(Console.ReadLine(), rnd.Next(0, 10), rnd.Next(0, 10)) 
+                {
+                    Weapons = playerWeapons
+                };
                 this.Map.Grid[Player.Latitude, Player.Longitude] = 1;
 
                 try

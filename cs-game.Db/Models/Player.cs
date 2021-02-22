@@ -32,5 +32,106 @@ namespace cs_game.Db.Models
             this.MaxHp = 20;
         }
 
+        public Monster Hit(Weapon weapon, Monster monster)
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Random rnd = new Random();
+            int damages = this.Attack + weapon.Attack;
+            int chance = rnd.Next(0, 10);
+
+            Monster hitMonster = context.Monsters.First(m => m.Id == monster.Id);
+
+            if ((chance/10) < weapon.HitRate)
+            {
+                hitMonster.Hp -= damages;
+                Console.WriteLine("Vous attaquez le {0} et il perd {1} points de vie", monster.Name, damages);
+                context.SaveChanges();
+            } else
+            {
+                Console.WriteLine("Vous glissez et loupez votre coup");
+            }
+
+            return monster;
+        }
+
+        public void ListInventory()
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Console.Clear();
+            try
+            {
+                Weapons = context.Weapons.Where(weapon => weapon.PlayerId == this.Id).ToList();
+            } catch
+            {
+                Weapons = null;
+            }
+
+            try
+            {
+                Items = context.Items.Where(item => item.PlayerId == this.Id).ToList();
+            }
+            catch
+            {
+                Items = null;
+            }
+
+            // Weapons
+            if (Weapons == null || Weapons.Count <= 0)
+            {
+                Console.WriteLine("Vous n'avez aucune arme");
+            }
+            else
+            {
+                Console.WriteLine("Armes :");
+
+                foreach (var weapon in Weapons)
+                {
+                    Console.WriteLine("- {0}", weapon.Name);
+                }
+            }
+
+            Console.WriteLine("");
+
+            // Items
+            if (Items == null || Items.Count <= 0)
+            {
+                Console.WriteLine("Vous n'avez aucun objet");
+            }
+            else
+            {
+                Console.WriteLine("Objets :");
+
+                foreach (var item in Items)
+                {
+                    Console.WriteLine("- {0}", item.Name);
+                }
+            }
+            Console.ReadLine();
+        }
+
+        public List<Weapon> GetWeapons()
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Weapons = context.Weapons.Where(w => w.PlayerId == this.Id).ToList();
+
+            return Weapons;
+        }
+
+        public List<Item> GetItems()
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Items = context.Items.Where(i => i.PlayerId == this.Id).ToList();
+
+            return Items;
+        }
+
     }
 }

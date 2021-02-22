@@ -1,7 +1,5 @@
-﻿using cs_game.Classes;
-using cs_game.Db;
+﻿using cs_game.Db;
 using cs_game.Db.Models;
-using cs_game.Scenes.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,35 +7,24 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cs_game.Scenes
+namespace cs_game.Scenes.Actions
 {
-    class Gameplay
+    class Fight
     {
         public Player Player;
         public Save Save;
         public Monster Monster;
         public bool isInputValid;
-        public bool isMonsterPresent;
+        public bool isPlayerTurn;
         public int selectorChoice;
 
-        public Gameplay(Save save)
+        public Fight(Player player, Monster monster)
         {
             var factory = new DbContextFactory();
             var context = factory.CreateDbContext(null);
 
-            this.Save = save;
-            this.Player = context.Players.First(player => player.Id == Save.PlayerId);
-
-            try
-            {
-                Monster = context.Monsters.First(monster => monster.SaveId == Save.Id && monster.Latitude == Player.Latitude && monster.Longitude == Player.Longitude);
-                isMonsterPresent = true;
-            } catch
-            {
-                Monster = null;
-                isMonsterPresent = false;
-            }
-            
+            this.Player = player;
+            this.Monster = monster;
 
             do
             {
@@ -49,15 +36,17 @@ namespace cs_game.Scenes
 
                 Console.Clear();
 
-                if (!isMonsterPresent)
+                if (!isPlayerTurn)
                 {
                     Console.WriteLine("Vous êtes en  X : {0} - Y : {1}", Player.Latitude, Player.Longitude);
+                    Console.WriteLine("Un {0} vous bloque la route", Monster.Name);
+                    Console.WriteLine("{0} points de vie restants", Monster.Hp);
                     Console.WriteLine("Que voulez-vous faire ?");
                     Console.WriteLine("");
-                    Console.WriteLine("1 - Se déplacer");
+                    Console.WriteLine("1 - Attaquer");
                     Console.WriteLine("2 - Afficher l'inventaire");
                     Console.WriteLine("3 - Afficher les statistiques");
-                    Console.WriteLine("4 - Quitter");
+                    Console.WriteLine("4 - Fuir");
 
                     selectorChoice = Int32.Parse(Console.ReadLine());
 
@@ -69,37 +58,39 @@ namespace cs_game.Scenes
                     {
                         isInputValid = false;
                     }
-                } else
-                {
-                    new Fight(Player, Monster);
                 }
-                
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Monster Turn");
+                    Console.ReadLine();
+                    isPlayerTurn = !isPlayerTurn;
+                }
+
             } while (!isInputValid);
-           
+
             switch (selectorChoice)
             {
                 case 1:
-                    new Move(Player);
-                    new Gameplay(save);
+                    new ChooseWeapon(Player, Monster);
                     break;
                 case 2:
                     new ListInventory(Player);
-                    new Gameplay(save);
+                    new Fight(Player, Monster);
                     break;
                 case 3:
                     new ListStats(Player);
-                    new Gameplay(save);
+                    new Fight(Player, Monster);
                     break;
                 case 4:
-                    new Home();
+                    new Run();
+                    new Fight(Player, Monster);
                     break;
                 default:
                     Console.WriteLine("Erreur");
                     break;
 
             }
-
-
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using cs_game.Db;
+using cs_game.Db.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,25 @@ namespace cs_game.Scenes.Actions
 {
     class Attack
     {
+        private Player Player;
+        private Weapon weapon;
+        private Monster Monster;
+        private Save Save;
+
+        public Attack(Player player, Weapon weapon, Monster monster)
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            this.Player = player;
+            this.Save = context.Saves.First(s => s.Name == Player.Name);
+            this.Monster = monster;
+
+            Console.Clear();
+            this.Player.Hit(weapon, this.Monster);
+            Console.ReadLine();
+
+                
+        }
     }
 }

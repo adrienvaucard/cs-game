@@ -13,6 +13,7 @@ namespace cs_game.Db.Models
         public float HitRate { get; set; }
 
         public Player Player { get; set; }
+        public int PlayerId { get; set; }
 
         public Weapon(string name, float hitRate, int attack = 2 )
         {
