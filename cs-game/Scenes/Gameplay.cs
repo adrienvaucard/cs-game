@@ -57,7 +57,7 @@ namespace cs_game.Scenes
             switch (selectorChoice)
             {
                 case 1:
-                    new Move();
+                    new Move(Player);
                     new Gameplay(save);
                     break;
                 case 2:
