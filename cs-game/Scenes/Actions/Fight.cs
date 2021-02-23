@@ -64,6 +64,15 @@ namespace cs_game.Scenes.Actions
                         Console.Clear();
                         Player updatedPlayer = this.Monster.Hit(Player);
                         Console.ReadLine();
+                        if (updatedPlayer.Hp <= 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Vous décédez des suites de vos blessures");
+                            Console.ReadLine();
+                            Save save = context.Saves.First(s => s.PlayerId == Player.Id);
+                            save.DeleteSave(save);
+                            new Home();
+                        }
                         new Fight(updatedPlayer, monster, true);
                     }
 

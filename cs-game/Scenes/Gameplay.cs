@@ -14,10 +14,12 @@ namespace cs_game.Scenes
     class Gameplay
     {
         public Player Player;
+        public Exit Exit;
         public Save Save;
         public Monster Monster;
         public bool isInputValid;
         public bool isMonsterPresent;
+        public bool isExitPresent;
         public int selectorChoice;
 
         public Gameplay(Save save)
@@ -28,6 +30,7 @@ namespace cs_game.Scenes
             this.Save = save;
             this.Player = context.Players.First(player => player.Id == Save.PlayerId);
 
+            // Check if Monster is Present
             try
             {
                 Monster = context.Monsters.First(monster => monster.SaveId == Save.Id && monster.Latitude == Player.Latitude && monster.Longitude == Player.Longitude);
@@ -38,9 +41,18 @@ namespace cs_game.Scenes
                 isMonsterPresent = false;
             }
             
-
             do
             {
+                try
+                {
+                    Exit = context.Exits.First(e => e.Id == Save.Id && e.Latitude == Player.Latitude && e.Longitude == Player.Longitude);
+                    isExitPresent = true;
+                }
+                catch
+                {
+                    isExitPresent = false;
+                }
+
                 if (isInputValid)
                 {
                     Console.WriteLine("Erreur : Veuillez rentrer une valeur correcte.");
@@ -51,31 +63,44 @@ namespace cs_game.Scenes
 
                 if (!isMonsterPresent)
                 {
-                    Console.WriteLine("Vous êtes en  X : {0} - Y : {1}", Player.Latitude, Player.Longitude);
-                    Console.WriteLine("Que voulez-vous faire ?");
-                    Console.WriteLine("");
-                    Console.WriteLine("1 - Se déplacer");
-                    Console.WriteLine("2 - Afficher l'inventaire");
-                    Console.WriteLine("3 - Afficher les statistiques");
-                    Console.WriteLine("4 - Quitter");
+                    if (!isExitPresent)
+                    {
+                        if (Player.DropItem())
+                        {
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        Console.WriteLine("Vous êtes en  X : {0} - Y : {1}", Player.Latitude, Player.Longitude);
+                        Console.WriteLine("Que voulez-vous faire ?");
+                        Console.WriteLine("");
+                        Console.WriteLine("1 - Se déplacer");
+                        Console.WriteLine("2 - Afficher l'inventaire");
+                        Console.WriteLine("3 - Afficher les statistiques");
+                        Console.WriteLine("4 - Quitter");
 
-                    try
+                        try
+                        {
+                            selectorChoice = Int32.Parse(Console.ReadLine());
+                        }
+                        catch
+                        {
+                            selectorChoice = 0;
+                        }
+
+
+                        if (selectorChoice > 0 && selectorChoice < 5)
+                        {
+                            isInputValid = true;
+                        }
+                        else
+                        {
+                            isInputValid = false;
+                        }
+                    } else
                     {
-                        selectorChoice = Int32.Parse(Console.ReadLine());
-                    } catch
-                    {
-                        selectorChoice = 0;
+                        new Win(save) ;
                     }
                     
-
-                    if (selectorChoice > 0 && selectorChoice < 5)
-                    {
-                        isInputValid = true;
-                    }
-                    else
-                    {
-                        isInputValid = false;
-                    }
                 } else
                 {
                     new Fight(Player, Monster, true);
@@ -101,7 +126,9 @@ namespace cs_game.Scenes
                     new Home();
                     break;
                 default:
-                    Console.WriteLine("Erreur");
+                    Console.WriteLine("Veuillez rentrez un choix valide");
+                    Console.ReadLine();
+                    new Gameplay(Save);
                     break;
 
             }

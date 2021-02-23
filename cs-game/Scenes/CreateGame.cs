@@ -66,13 +66,19 @@ namespace cs_game.Scenes
             } while (isPlayerExists);
 
             // Place Exit
-            int[] exitPos = new int[] { rnd.Next(0, 10), rnd.Next(0, 10) };
-            if (this.Map.Grid[exitPos[0], exitPos[1]] == 0)
+            bool isEmpty = false;
+            do
             {
-                Exit = new Exit(rnd.Next(0, 10), rnd.Next(0, 10));
-                this.Map.Grid[Exit.Latitude, Exit.Longitude] = 3;
-                context.Exits.Add(Exit);
-            }
+                int[] exitPos = new int[] { rnd.Next(0, 10), rnd.Next(0, 10) };
+                if (this.Map.Grid[exitPos[0], exitPos[1]] == 0)
+                {
+                    Exit = new Exit(rnd.Next(0, 10), rnd.Next(0, 10));
+                    this.Map.Grid[Exit.Latitude, Exit.Longitude] = 3;
+                    context.Exits.Add(Exit);
+                    isEmpty = true;
+                }
+            } while (!isEmpty);
+            
 
             // Place Monsters
             List<Monster> monstersList = new List<Monster>();

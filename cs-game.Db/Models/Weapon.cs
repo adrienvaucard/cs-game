@@ -15,6 +15,8 @@ namespace cs_game.Db.Models
         public Player Player { get; set; }
         public int PlayerId { get; set; }
 
+        public int SaveId { get; set; }
+
         public Weapon(string name, float hitRate, int attack = 2 )
         {
             this.Name = name;

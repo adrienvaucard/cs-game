@@ -20,10 +20,20 @@ namespace cs_game.Scenes
             var context = factory.CreateDbContext(null);
 
             Saves = context.Saves.ToList();
-            foreach (Save save in Saves)
+            if (Saves.Count > 0)
             {
-                options.Add(new Option(save.Name, () => new Gameplay(save)));
+                foreach (Save save in Saves)
+                {
+                    options.Add(new Option(save.Name, () => new Gameplay(save)));
+                }
+            } else
+            {
+                Console.Clear();
+                Console.WriteLine("Il n'y a aucune partie en cours actuellement");
+                Console.ReadLine();
+                new Home();
             }
+            
 
             var selector = new OptionSelector(options);
         }

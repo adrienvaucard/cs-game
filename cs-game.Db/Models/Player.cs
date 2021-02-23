@@ -108,7 +108,7 @@ namespace cs_game.Db.Models
             return player;
         }
 
-        public void DropItem()
+        public bool DropItem()
         {
             Random rnd = new Random();
             var factory = new DbContextFactory();
@@ -122,18 +122,27 @@ namespace cs_game.Db.Models
             {
                 items.Add(new Item("Flacon de Mercurochrome", 10));
                 Console.WriteLine("Vous récupérez un Flacon de Mercurochrome");
+                player.Items = items;
+                context.SaveChanges();
+                return true;
             } else if (droppedItem >= 2 && droppedItem < 4)
             {
                 items.Add(new Item("Canette de Monster", 0, 2));
                 Console.WriteLine("Vous récupérez une canette de Monster");
+                player.Items = items;
+                context.SaveChanges();
+                return true;
             } else if (droppedItem >= 4 && droppedItem < 6)
             {
                 items.Add(new Item("Rouleau de Flex tape", 0, 0 ,2));
                 Console.WriteLine("Vous récupérez un rouleau de Flex Tape");
+                player.Items = items;
+                context.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
             }
-
-            player.Items = items;
-            context.SaveChanges();
         }
 
         public void DropWeapon()
