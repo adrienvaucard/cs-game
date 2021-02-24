@@ -93,6 +93,37 @@ namespace cs_game.Db.Models
             }
         }
 
+        public void UseItem(Item item)
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            Player player = context.Players.First(p => p.Id == item.PlayerId);
+
+            Console.Clear();
+            Console.WriteLine("Vous utilisez 1x {0}", item.Name);
+            if (item.AttackBoost > 0)
+            {
+                player.Attack += item.AttackBoost;
+                Console.WriteLine("Il vous donne {0} points d'attaque en plus", item.AttackBoost);
+            }
+            if (item.DefenseBoost > 0)
+            {
+                player.Defense += item.DefenseBoost;
+                Console.WriteLine("Il vous donne {0} points de défense en plus", item.DefenseBoost);
+            }
+            if (item.HpBoost > 0)
+            {
+                player.Hp += item.HpBoost;
+                Console.WriteLine("Il vous donne {0} points de vie en plus", item.HpBoost);
+            }
+
+            context.Items.Remove(item);
+            context.SaveChanges();
+            
+
+        }
+
         public Player GainXp()
         {
             Random rnd = new Random();

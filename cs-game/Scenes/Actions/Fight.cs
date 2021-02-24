@@ -55,7 +55,7 @@ namespace cs_game.Scenes.Actions
                         Console.WriteLine("Que voulez-vous faire ?");
                         Console.WriteLine("");
                         Console.WriteLine("1 - Attaquer");
-                        Console.WriteLine("2 - Afficher l'inventaire");
+                        Console.WriteLine("2 - Utiliser un objet");
                         Console.WriteLine("3 - Afficher les statistiques");
                         Console.WriteLine("4 - Fuir");
 
@@ -93,7 +93,7 @@ namespace cs_game.Scenes.Actions
                         new ChooseWeapon(Player, Monster);
                         break;
                     case 2:
-                        new ListInventory(Player);
+                        new UseItem(this.Player, this.Monster);
                         new Fight(Player, Monster, true);
                         break;
                     case 3:
