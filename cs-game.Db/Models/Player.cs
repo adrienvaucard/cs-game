@@ -45,8 +45,12 @@ namespace cs_game.Db.Models
 
             if (((float) chance/10) < weapon.HitRate)
             {
-                hitMonster.Hp -= damages;
-                Console.WriteLine("Vous attaquez le {0} et il perd {1} points de vie", monster.Name, damages);
+                if (!(hitMonster.Defense >= damages))
+                {
+                    hitMonster.Hp -= damages - hitMonster.Defense;
+                }
+                
+                Console.WriteLine("Vous attaquez le {0} et il perd {1} points de vie", monster.Name, damages <= hitMonster.Defense ? 0 : damages - hitMonster.Defense);
                 context.SaveChanges();
             } else
             {

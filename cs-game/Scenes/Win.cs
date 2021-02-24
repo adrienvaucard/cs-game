@@ -15,7 +15,7 @@ namespace cs_game.Scenes
         {
             this.Save = save;
             Console.Clear();
-            Console.WriteLine("Félicitations, vous vous êtes échappés du labyrinthe. GG WP");
+            Console.WriteLine("Félicitations, vous vous êtes échappés du labyrinthe !");
             Console.ReadLine();
             save.DeleteSave(save);
             
