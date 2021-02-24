@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace cs_game.Db
 {
@@ -14,7 +11,13 @@ namespace cs_game.Db
         {
             var dbContextBuilder = new DbContextOptionsBuilder<GameDbContext>();
 
-            dbContextBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=ZorkDb;Trusted_Connection=true;",
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+
+            var configuration = builder.Build();
+
+            dbContextBuilder.UseSqlServer(configuration.GetConnectionString("DB_URL"),
                 opt => opt.MigrationsAssembly("cs-game.Db"));
 
             return new GameDbContext(dbContextBuilder.Options);

@@ -12,7 +12,6 @@ namespace cs_game.Scenes.Actions
     {
         private Player Player;
         private Monster Monster;
-        private Save Save;
 
         public Attack(Player player, Weapon weapon, Monster monster)
         {
