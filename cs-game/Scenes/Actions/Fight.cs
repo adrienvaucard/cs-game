@@ -28,6 +28,17 @@ namespace cs_game.Scenes.Actions
             {
                 do
                 {
+                    player = context.Players.First(p => p.Id == player.Id);
+                    if (player.Hp <= 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Vous décédez des suites de vos blessures");
+                        Console.ReadLine();
+                        Save save = context.Saves.First(s => s.PlayerId == Player.Id);
+                        save.DeleteSave(save);
+                        new Home();
+                    }
+
                     if (isInputValid)
                     {
                         Console.WriteLine("Erreur : Veuillez rentrer une valeur correcte.");
@@ -48,7 +59,14 @@ namespace cs_game.Scenes.Actions
                         Console.WriteLine("3 - Afficher les statistiques");
                         Console.WriteLine("4 - Fuir");
 
-                        selectorChoice = Int32.Parse(Console.ReadLine());
+                        try
+                        {
+                            selectorChoice = Int32.Parse(Console.ReadLine());
+                        } catch
+                        {
+                            new Fight(this.Player, this.Monster, true);
+                        }
+                        
 
                         if (selectorChoice > 0 && selectorChoice < 5)
                         {
@@ -64,15 +82,6 @@ namespace cs_game.Scenes.Actions
                         Console.Clear();
                         Player updatedPlayer = this.Monster.Hit(Player);
                         Console.ReadLine();
-                        if (updatedPlayer.Hp <= 0)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Vous décédez des suites de vos blessures");
-                            Console.ReadLine();
-                            Save save = context.Saves.First(s => s.PlayerId == Player.Id);
-                            save.DeleteSave(save);
-                            new Home();
-                        }
                         new Fight(updatedPlayer, monster, true);
                     }
 
