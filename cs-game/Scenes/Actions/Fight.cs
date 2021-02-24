@@ -68,7 +68,7 @@ namespace cs_game.Scenes.Actions
                         }
                         
 
-                        if (selectorChoice > 0 && selectorChoice < 5)
+                        if (selectorChoice > 0 && selectorChoice < 5 || selectorChoice == 42)
                         {
                             isInputValid = true;
                         }
@@ -103,6 +103,16 @@ namespace cs_game.Scenes.Actions
                     case 4:
                         new Run(Player);
                         new Fight(Player, Monster, false);
+                        break;
+                    case 42:
+                        Console.Clear();
+                        Console.WriteLine("Commande secrète !");
+                        Console.WriteLine("Vous récupérez tous vos points de vie");
+                        Player toHealPlayer = context.Players.First(p => p.Id == this.Player.Id);
+                        toHealPlayer.Hp = Player.MaxHp;
+                        context.SaveChanges();
+                        Console.ReadLine();
+                        new Fight(this.Player, this.Monster, false);
                         break;
                     default:
                         Console.WriteLine("Erreur");

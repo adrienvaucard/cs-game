@@ -296,7 +296,7 @@ namespace cs_game.Db.Models
             Console.Clear();
             Console.WriteLine("Statistiques");
             Console.WriteLine("HP - {0}", player.Hp);
-            Console.WriteLine("XP - {0}", player.Xp);
+            Console.WriteLine("Niveau - {0}", (int) player.Xp / 10);
             Console.WriteLine("Attack - {0}", player.Attack);
             Console.WriteLine("Defense - {0}", player.Defense);
 

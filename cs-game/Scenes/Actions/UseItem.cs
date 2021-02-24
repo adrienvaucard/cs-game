@@ -29,6 +29,7 @@ namespace cs_game.Scenes.Actions
                 options.Add(new Option(item.Name, () => 
                 {
                     Player.UseItem(item);
+                    options.Clear();
                     Console.Read();
                     new Fight(this.Player, this.Monster, false);
                 }));
