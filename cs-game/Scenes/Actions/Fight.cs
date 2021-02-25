@@ -1,0 +1,138 @@
+﻿using cs_game.Db;
+using cs_game.Db.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace cs_game.Scenes.Actions
+{
+    class Fight
+    {
+        public Player Player;
+        public Monster Monster;
+        public bool isInputValid;
+        public int selectorChoice;
+
+        public Fight(Player player, Monster monster, bool isPlayerTurn)
+        {
+            var factory = new DbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            this.Player = player;
+            this.Monster = monster;
+
+            if (Monster.Hp > 0)
+            {
+                do
+                {
+                    player = context.Players.First(p => p.Id == player.Id);
+                    if (player.Hp <= 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Vous décédez des suites de vos blessures");
+                        Console.ReadLine();
+                        Save save = context.Saves.First(s => s.PlayerId == Player.Id);
+                        save.DeleteSave(save);
+                        new Home();
+                    }
+
+                    if (isInputValid)
+                    {
+                        Console.WriteLine("Erreur : Veuillez rentrer une valeur correcte.");
+                        Thread.Sleep(2000);
+                    }
+
+                    Console.Clear();
+
+                    if (isPlayerTurn)
+                    {
+                        Console.WriteLine("Vous êtes en  X : {0} - Y : {1}", Player.Latitude, Player.Longitude);
+                        Console.WriteLine("Un {0} vous bloque la route", Monster.Name);
+                        Console.WriteLine("{0} points de vie restants", Monster.Hp);
+                        Console.WriteLine("Que voulez-vous faire ?");
+                        Console.WriteLine("");
+                        Console.WriteLine("1 - Attaquer");
+                        Console.WriteLine("2 - Utiliser un objet");
+                        Console.WriteLine("3 - Afficher les statistiques");
+                        Console.WriteLine("4 - Fuir");
+
+                        try
+                        {
+                            selectorChoice = Int32.Parse(Console.ReadLine());
+                        } catch
+                        {
+                            new Fight(this.Player, this.Monster, true);
+                        }
+                        
+
+                        if (selectorChoice > 0 && selectorChoice < 5 || selectorChoice == 42)
+                        {
+                            isInputValid = true;
+                        }
+                        else
+                        {
+                            isInputValid = false;
+                        }
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Player updatedPlayer = this.Monster.Hit(Player);
+                        Console.ReadLine();
+                        new Fight(updatedPlayer, monster, true);
+                    }
+
+                } while (!isInputValid);
+
+                switch (selectorChoice)
+                {
+                    case 1:
+                        new ChooseWeapon(Player, Monster);
+                        break;
+                    case 2:
+                        new UseItem(this.Player, this.Monster);
+                        new Fight(Player, Monster, true);
+                        break;
+                    case 3:
+                        new ListStats(Player);
+                        new Fight(Player, Monster, true);
+                        break;
+                    case 4:
+                        new Run(Player);
+                        new Fight(Player, Monster, false);
+                        break;
+                    case 42:
+                        Console.Clear();
+                        Console.WriteLine("Commande secrète !");
+                        Console.WriteLine("Vous récupérez tous vos points de vie");
+                        Player toHealPlayer = context.Players.First(p => p.Id == this.Player.Id);
+                        toHealPlayer.Hp = Player.MaxHp;
+                        context.SaveChanges();
+                        Console.ReadLine();
+                        new Fight(this.Player, this.Monster, false);
+                        break;
+                    default:
+                        Console.WriteLine("Erreur");
+                        break;
+
+                }
+            } else
+            {
+                Console.Clear();
+                Console.WriteLine("Le {0} est mort", Monster.Name);
+                Player.GainXp();
+                Player.DropItem();
+                Player.DropWeapon();
+                Save save = context.Saves.First(s => s.PlayerId == Player.Id);
+                Monster.Die();
+                Console.ReadLine();
+                new Gameplay(save);
+            }
+
+            
+        }
+    }
+}
