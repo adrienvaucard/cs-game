@@ -53,7 +53,6 @@ C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\bin\Debug\net5.0\
 C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\net5.0\cs-game.Db.csprojAssemblyReference.cache
 C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\net5.0\cs-game.Db.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\net5.0\cs-game.Db.AssemblyInfoInputs.cache
 C:\Users\Adrien\Documents\Cours\C#\Projects\cs-game\cs-game.Db\obj\Debug\net5.0\cs-game.Db.AssemblyInfo.cs

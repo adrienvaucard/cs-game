@@ -71,6 +71,7 @@ namespace cs_game.Scenes
                             Console.Clear();
                         }
                         Console.WriteLine("Vous êtes en  X : {0} - Y : {1}", Player.Latitude, Player.Longitude);
+                        Console.WriteLine("Vous arrivez dans une salle vide. Vous êtes seuls");
                         Console.WriteLine("Que voulez-vous faire ?");
                         Console.WriteLine("");
                         Console.WriteLine("1 - Se déplacer");
